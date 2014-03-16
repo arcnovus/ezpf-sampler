@@ -1,31 +1,39 @@
 <!doctype html>
 <html lang="en" ng-app="ezpfSamplerApp">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My HTML File</title>
-  <link rel="stylesheet" href="/stylesheets/application.css">
-  <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
-  <script src="/cordova.js"></script>
-    
-  <scrpt src="/components/jquery/jquery.min.js"></scrpt>
-  <script src="/components/steroids-js/steroids.js"></script>
-  <script src="/components/angular/angular.js"></script>
-  <script src="/components/hammerjs/hammer.js"></script>
-  <script src="/components/angular-hammer/angular-hammer.js"></script>
-  <script src="/compoents/bootstrap/dist/js/bootstrap.min.js"></script>
-    
-  <script src="/models/models.js"></script>
-  <script src="/javascripts/application.js"></script>  
-  <script src="/controllers/<%= yield.controller %>.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My HTML File</title>
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/cordova.js"></script>
+
+    <scrpt src="/components/jquery/jquery.min.js"></scrpt>
+    <script src="/components/steroids-js/steroids.js"></script>
+    <script src="/components/angular/angular.js"></script>
+    <script src="/components/underscore/underscore.js"></script>
+    <script src="/components/angular-resource/angular-resource.js"></script>
+    <script src="/components/restangular/dist/restangular.js"></script>
+    <script src="/components/parstangular/parstangular.js"></script>
+    <script src="/components/hammerjs/hammer.js"></script>
+    <script src="/components/angular-hammer/angular-hammer.js"></script>
+    <script src="/compoents/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+    <script src="/models/models.js"></script>
+    <script src="/javascripts/application.js"></script>
+    <script src="/controllers/<%= yield.controller %>.js"></script>
 </head>
+
 <body>
     <div class="container">
- 
-        <%= yield.view %>
-    
+
+        <%=yield.view %>
+
     </div>
-        
- 
+
+
 </body>
+
 </html>

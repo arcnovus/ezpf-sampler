@@ -6,22 +6,23 @@
     <form role="form">
         <div class="form-group nullable">
             <select id="ddBrand" class="form-control" ng-model="model.brand" ng-options="b.name for b in model.brands | orderBy:name" data-ng-change="onBrandSelect()">
-                <option value="">--Select the device's brand--</option>
+                <option value="">--Loading brands--</option>
             </select>
         </div>
         <div class="form-group" id="otherGroup" style="display:none;">
-            <input type="text" id="tbOther" placeholder="Enter the brand name..." class="form-control" data-ng-model="model.brand" data-ng-change="onEnterOther()"/>
+            <input type="text" id="tbOther" placeholder="Enter the brand name..." class="form-control" data-ng-model="model.brand" data-ng-change="onEnterOther()" />
         </div>
-                <div class="form-group" id="serialGroup">
+        <div class="form-group" id="serialGroup">
             <input type="text" id="tbSerial" placeholder="Enter the serial number..." class="form-control" data-ng-model="model.serial" />
         </div>
-                <div class="form-group" id="pcodeGroup">
-            <input type="text" id="tbProductCode" placeholder="Enter the product code..." class="form-control" data-ng-model="model.productCode"/>
+        <div class="form-group" id="pcodeGroup">
+            <input type="text" id="tbProductCode" placeholder="Enter the product code..." class="form-control" data-ng-model="model.productCode" />
         </div>
-                <div class="form-group" id="notesGroup">
+        <div class="form-group" id="notesGroup">
             <textarea rows="3" id="tbNotes" placeholder="Add any notes..." class="form-control" data-ng-model="model.notes"></textarea>
         </div>
-        <button type="button" id="btnScan" data-ng-click="onScanTap()" class="btn btn-primary btn-lrg btn-block" disabled>Scan Device!</button>
+        <button type="button" id="btnScan" hm-tap="onScanTap()" class="btn btn-primary btn-lrg btn-block" disabled>Scan Device!</button>
     </form>
     <div id="scanResult">{{ scanData }}</div>
+
 </div>
