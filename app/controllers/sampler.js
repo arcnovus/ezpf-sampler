@@ -9,10 +9,14 @@ app.controller("ctrlBrandSelect", function ($scope, $log, sampleData) {
         $log.debug("sampleData model assigned to current scope");
         $log.debug("Loading brand list async");
         //$scope.model.brands = $scope.model.getBrands();
+
         $scope.model.getBrands().then(function (result) {
-            document.getElementById("ddBrand").options[0].innerHTML = "--Select the device's brand--";
+            $scope.selectMessage = "--Select the device's brand--";
         }, function () {});
 
+        $scope.selectMessage = '--Loading brands.--';
+        $scope.showOther = false;
+        $scope.disableButton = true;
         //        $scope.model.getBrands().success(function (response) {
         //            $scope.model.brands = response.results;
         //            document.getElementById("ddBrand").options[0].innerHTML = "--Select the device's brand--";
@@ -21,25 +25,27 @@ app.controller("ctrlBrandSelect", function ($scope, $log, sampleData) {
         $log.debug("ctrlBrandSelect Initialized");
     };
 
+
     $scope.onBrandSelect = function () {
         selectedItem = $scope.model.brand.name;
         if (selectedItem == "other") {
             $scope.model.brand = '';
-            document.getElementById("otherGroup").style.display = "block";
-            document.getElementById("btnScan").disabled = true;
+            $scope.showOther = true;
+            $scope.disableButton = true;
         } else if (selectedItem != '') {
-            document.getElementById("btnScan").disabled = false;
-            document.getElementById("otherGroup").style.display = "none";
+            $scope.showOther = false;
+            $scope.disableButton = false;
         } else {
-            document.getElementById("otherGroup").style.display = "none";
+            $scope.showOther = false;
+            $scope.model.brand = '';
         }
     };
 
     $scope.onEnterOther = function () {
         if ($scope.model.brand != '') {
-            document.getElementById("btnScan").disabled = false;
+            $scope.disableButton = false;
         } else {
-            document.getElementById("btnScan").disabled = true;
+            $scope.disableButton = true;
         }
 
     };

@@ -1,3 +1,8 @@
+<style>
+    .ng-hide {
+        display: none;
+    }
+</style>
 <br/>
 <p id="instructions">
     Please fill in the details of the device you wish to scan.
@@ -5,12 +10,13 @@
 <div ng-controller="ctrlBrandSelect">
     <form role="form">
         <div class="form-group nullable">
-            <select id="ddBrand" class="form-control" ng-model="model.brand" ng-options="b.name for b in model.brands | orderBy:name" data-ng-change="onBrandSelect()">
-                <option value="">--Loading brands--</option>
+            <select id="ddBrand" class="form-control" ng-model="model.brand" ng-options="b.name for b in model.brands" data-ng-change="onBrandSelect()">
+                <option value="">{{ selectMessage }}</option>
             </select>
         </div>
-        <div class="form-group" id="otherGroup" style="display:none;">
-            <input type="text" id="tbOther" placeholder="Enter the brand name..." class="form-control" data-ng-model="model.brand" data-ng-change="onEnterOther()" />
+        <div class="form-group ng-hide" id="otherGroup" ng-show="showOther">
+            <input type="text" id="tbOther" placeholder="Enter the brand name..." class="form-control" data-ng-model="model.brand.name" data-ng-change="onEnterOther()" />
+
         </div>
         <div class="form-group" id="serialGroup">
             <input type="text" id="tbSerial" placeholder="Enter the serial number..." class="form-control" data-ng-model="model.serial" />
@@ -21,8 +27,8 @@
         <div class="form-group" id="notesGroup">
             <textarea rows="3" id="tbNotes" placeholder="Add any notes..." class="form-control" data-ng-model="model.notes"></textarea>
         </div>
-        <button type="button" id="btnScan" hm-tap="onScanTap()" class="btn btn-primary btn-lrg btn-block" disabled>Scan Device!</button>
+        <button type="button" id="btnScan" hm-tap="onScanTap()" class="btn btn-primary btn-lrg btn-block" data-ng-disabled="disableButton" disabled>Scan Device!</button>
     </form>
-    <div id="scanResult">{{ scanData }}</div>
+    <div id="scanResult">{{ model.brand.name }}</div>
 
 </div>
