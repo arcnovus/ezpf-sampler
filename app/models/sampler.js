@@ -1,4 +1,4 @@
-var samplerModule = angular.module("samplerModel", ['parstangular']);
+var samplerModule = angular.module("samplerModel", ['parstangular', 'ParseServices', 'ExternalDataServices']);
 samplerModule.config(function ($httpProvider) {
 
     var parseAppId = '5Md6MIrUHZl05WPqUaBOiIrWaD7HUtCRSdpR1CoU';
@@ -9,7 +9,7 @@ samplerModule.config(function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 });
 
-samplerModule.factory("sampleData", function ($http, parseApi, parseClasses) {
+samplerModule.factory("sampleData", function ($http, parseApi, parseClasses, parseQueryAngular) {
 
     var factory = {};
 
@@ -32,13 +32,32 @@ samplerModule.factory("sampleData", function ($http, parseApi, parseClasses) {
     factory.brands = '';
 
     factory.getBrands = function () {
+        
+	var Brand = Parse.Object.extendAngular({
+		className:"Brand",
+		setName: function(name) {
+			this.set('name',name);
+			return this;
+		},
 
-        var brandPromise = parseClasses.all('Brand').getList({
-            "order": "name"
-        });
+		getName: function(name) {
+			return this.get('name');
+		},
 
-        factory.brands = brandPromise.$object;
-        return brandPromise;
+		destroyParse:function(){
+			return ParseQueryAngular(this,{functionToCall:"destroy"});
+		}
+	});
+        
+        //var Brands = new Parse.Query(Brand).find().
+        
+        //        var brandPromise = parseClasses.all('Brand').getList({
+        //            "order": "name"
+        //        });
+        //
+        //        factory.brands = brandPromise.$object;
+        //        return brandPromise;
+
 
     };
 

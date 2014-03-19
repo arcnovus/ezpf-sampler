@@ -5,6 +5,8 @@ appDependencies.push("hmTouchEvents");
 appDependencies.push("restangular");
 appDependencies.push('parstangular');
 appDependencies.push("samplerModel");
+appDependencies.push("ParseServices");
+
 //appDependencies.push("parseAngular");
 
 
