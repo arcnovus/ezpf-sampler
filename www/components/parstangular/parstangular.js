@@ -19,13 +19,14 @@ parstangularModule.config(function (RestangularProvider) {
         }
         return newResponse;
     });
+
 });
 
-parseApiFactory = parstangularModule.factory('parseApi', ['Restangular', 'parseConfig',
+var parseApiFactory = parstangularModule.factory('parseApi', ['Restangular', 'parseConfig',
 
     function (Restangular, parseConfig) {
 
-        return Restangular.withConfig(function (RestangularConfigurer) {
+        var newApi = Restangular.withConfig(function (RestangularConfigurer) {
             RestangularConfigurer.setBaseUrl(parseConfig.baseUrl);
             RestangularConfigurer.setDefaultHeaders({
                 'X-Parse-Application-Id': parseConfig.appId,
@@ -38,9 +39,15 @@ parseApiFactory = parstangularModule.factory('parseApi', ['Restangular', 'parseC
             });
 
         });
+
+        //        newApi.prototype.parseObject = function (objName) {
+        //
+        //            return this.all("classes").all(objName);
+        //        };
+        return newApi;
     }]);
 
-parseClassFactory = parstangularModule.factory('parseClasses', ['parseApi',
+var parseClassFactory = parstangularModule.factory('parseClasses', ['parseApi',
 
     function (parseApi) {
 

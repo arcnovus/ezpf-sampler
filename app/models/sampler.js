@@ -9,7 +9,7 @@ samplerModule.config(function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 });
 
-samplerModule.factory("sampleData", function ($http, parseApi, parseClasses, parseQueryAngular) {
+samplerModule.factory("sampleData", function ($http, parseApi, parseClasses) {
 
     var factory = {};
 
@@ -32,31 +32,34 @@ samplerModule.factory("sampleData", function ($http, parseApi, parseClasses, par
     factory.brands = '';
 
     factory.getBrands = function () {
-        
-	var Brand = Parse.Object.extendAngular({
-		className:"Brand",
-		setName: function(name) {
-			this.set('name',name);
-			return this;
-		},
 
-		getName: function(name) {
-			return this.get('name');
-		},
+        //var objBrand = parseApi.parseObject('Brand');
+        //factory.brands = objBrand.getList().$object;
 
-		destroyParse:function(){
-			return ParseQueryAngular(this,{functionToCall:"destroy"});
-		}
-	});
-        
-        //var Brands = new Parse.Query(Brand).find().
-        
-        //        var brandPromise = parseClasses.all('Brand').getList({
-        //            "order": "name"
-        //        });
+        //	var Brand = Parse.Object.extendAngular({
+        //		className:"Brand",
+        //		setName: function(name) {
+        //			this.set('name',name);
+        //			return this;
+        //		},
         //
-        //        factory.brands = brandPromise.$object;
-        //        return brandPromise;
+        //		getName: function(name) {
+        //			return this.get('name');
+        //		},
+        //
+        //		destroyParse:function(){
+        //			return ParseQueryAngular(this,{functionToCall:"destroy"});
+        //		}
+        // });
+
+        //var Brands = new Parse.Query(Brand).find().
+
+                var brandPromise = parseClasses.all('Brand').getList({
+                 "order": "name"
+             });
+
+             factory.brands = brandPromise.$object;
+             return brandPromise;
 
 
     };
